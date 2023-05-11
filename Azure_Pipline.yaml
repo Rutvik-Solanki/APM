@@ -1,0 +1,22 @@
+trigger: none
+
+pool:
+ name: 'Test_Pool'
+
+steps:
+    
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '$(workingDirectory)'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: '$(workingDirectory)'
+    customCommand: '$(customBuildCommand)'
+    
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(publishPath)'
+    ArtifactName: '$(BuildArtifactName)'
